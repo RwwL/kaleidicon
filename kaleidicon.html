@@ -9,13 +9,13 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			//var kaleidicon = (function() {
+			var kaleidicon = (function() {
 					var ctx,
 						canvas = document.createElement('canvas'),
-						lines = 500,
-						dim = canvas.height = canvas.width = 320,
+						lines = 5,
+						dim = canvas.height = canvas.width = 16,
 						img = document.createElement('img'),
-						link = document.getElementById('favicon'),
+						faviconElement = document.getElementById('favicon'),
 						body = document.getElementsByTagName('body')[0],
 						getRandomRgb = function(){
 							return 'rgb(' + 
@@ -42,21 +42,29 @@
 						};
 				
 				if (canvas.getContext) {
+
 					body.appendChild(canvas);
 					ctx = canvas.getContext('2d');
+
+					// draw border
 					ctx.strokeStyle = getRandomRgb();
 					ctx.strokeRect(0,0,dim,dim);
-					ctx.save();
-					var drawing = 'drawing';
-					console.time(drawing);
+					
+					//var drawing = 'drawing';
+					//console.time(drawing);
+					
+					// draw!
 					for (lines; lines > 0; lines--) {
 						drawRandomLine();
 					}
-					console.timeEnd(drawing);
-					link.href = canvas.toDataURL('image/png');
+					
+					//console.timeEnd(drawing);
+					
+					// copy the canvas to the favicon
+					faviconElement.href = canvas.toDataURL('image/png');
 				}
 
-			//})();
+			})();
 		
 		</script>
 	</body>
