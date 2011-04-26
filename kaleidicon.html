@@ -9,10 +9,11 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			var kaleidicon = (function() {
+			//var kaleidicon = (function() {
 					var ctx,
 						canvas = document.createElement('canvas'),
-						dim = canvas.height = canvas.width = 16,
+						lines = 500,
+						dim = canvas.height = canvas.width = 320,
 						img = document.createElement('img'),
 						link = document.getElementById('favicon'),
 						body = document.getElementsByTagName('body')[0],
@@ -24,14 +25,18 @@
 						},
 						getRandomPoint = function(){
 							return { x: Math.floor(Math.random()*dim+1), y: Math.floor(Math.random()*dim+1) }
-						}
+						},
 						drawRandomLine = function(){
+							ctx.strokeStyle = getRandomRgb();
 							var startPoint = getRandomPoint();
 							var endPoint = getRandomPoint();
-							var color = ctx.fillStyle = getRandomRgb();
-							//draw the main line
-							drawReflectedLines(startPoint, endPoint, color);
-						}
+							ctx.beginPath();
+							ctx.moveTo(startPoint.x, startPoint.y);
+							ctx.lineTo(endPoint.x, endPoint.y);
+							ctx.stroke();
+							ctx.closePath();
+							//drawReflectedLines(startPoint, endPoint);
+						},
 						drawReflectedLines = function(){
 							// wacky math time
 						};
@@ -39,16 +44,19 @@
 				if (canvas.getContext) {
 					body.appendChild(canvas);
 					ctx = canvas.getContext('2d');
-					ctx.fillStyle = getRandomRgb();
-					ctx.fillRect(0,0,dim,dim);
-					
-					
-					
+					ctx.strokeStyle = getRandomRgb();
+					ctx.strokeRect(0,0,dim,dim);
+					ctx.save();
+					var drawing = 'drawing';
+					console.time(drawing);
+					for (lines; lines > 0; lines--) {
+						drawRandomLine();
+					}
+					console.timeEnd(drawing);
 					link.href = canvas.toDataURL('image/png');
-
 				}
 
-			})();
+			//})();
 		
 		</script>
 	</body>
