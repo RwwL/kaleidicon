@@ -1,5 +1,7 @@
 Draw a random, kaleidoscope-style image to the favicon on each page load. Just a little HTML5 Canvas drawing self-study.
 
+TODO: um, actually add the reflected drawing. It's just a baby step so far.
+
 Yes, totally inspired by the crazy brilliance of "DEFENDER of the favicon":
 
 http://www.p01.org/releases/DEFENDER_of_the_favicon/
